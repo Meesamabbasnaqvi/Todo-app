@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Todo app</title>
+
+
+</head>
+
+<body>
+
+  <main>
+
+
+    <div class="container">
+      <h1>
+        Todo
+      </h1>
+      <img id="moon" onclick="darkTheme()" src="./images/icon-moon.svg" alt="">
+      <img id="sun" style="display: none;" onclick="lightTheme()" src="./images/icon-sun.svg" alt="">
+    </div>
+    <form onsubmit="getVal()">
+
+      <input name="names" type="text" placeholder="create a new todo....">
+    </form>
+    <div class="inputValue">
+      <ul id="container">
+        <li>
+          I created my To-Do App
+        </li>
+      </ul>
+      <div class="d-flex">
+        <div class="item-left">
+          items left
+        </div>
+        <div class="functions">
+          <div id="all">
+            All
+          </div>
+          <div id="active">
+            Active
+          </div>
+          <div id="completed">
+            Completed
+          </div>
+        </div>
+        <div id="clear">
+          Clear Completed
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Add dynamic number -->
+
+  <script>
+    const x = document.querySelector("input")
+
+    const displayval = document.createElement("li")
+    const todoBox = document.getElementById("container")
+    let itemcount = document.querySelector(".item-left")
+    let count = 0;
+    let complete = document.getElementById("completed")
+    let all = document.getElementById("all")
+    let clear = document.getElementById("clear")
+    let active = document.getElementById("active")
+
+
+    const addTodo = (item) => {
+      const listItem = document.createElement("li")
+
+      listItem.innerHTML = `${item}<img onclick="remove()" class="closeicon" src="./images/icon-cross.svg" alt="">`
+      todoBox.appendChild(listItem)
+      active.addEventListener("click", () => {
+        active.forEach(element.addEventListener("click", () => {
+          console.log("ehhelfheofew")
+        })
+        )
+      })
+      listItem.addEventListener("click", () => {
+
+        function remove() {
+          listItem.style.display = "none"
+        }
+        listItem.style.textDecoration = "line-through"
+        listItem.style.color = "grey"
+        if (count === 0) {
+          count = 0
+        } else {
+          count--
+        }
+        itemcount.innerHTML = count + " Item left"
+        console.log(count)
+      })
+    }
+
+    // loop for clear and actibe buttons
+
+    function getVal() {
+      count++
+      itemcount.innerHTML = count + " Item left "
+      event.preventDefault();
+      document.body.appendChild(displayval)
+      addTodo(x.value)
+      console.log(count)
+      x.value = ""
+    }
+    // "./images/icon-sun.svg" "url('./images/bg-desktop-dark.jpg')"
+    let sun = document.getElementById("sun")
+    let moon = document.getElementById("moon")
+    let darkBg = document.querySelector("main")
+    let body = document.querySelector("body")
+    function darkTheme() {
+      moon.style.display = "none"
+      darkBg.classList.add("dark-theme")
+      body.classList.add("dark")
+      sun.style.display = "block"
+      console.log("hello")
+    }
+    function lightTheme() {
+      sun.style.display = "none"
+      moon.style.display = "block"
+      darkBg.classList.remove("dark-theme")
+      body.classList.remove("dark")
+    }
+
+    let xyz = JSON.parse(localStorage.getItem("setData"))
+    localStorage.setItem("setData",JSON.stringify(x.value))
+  </script>
+</body>
+
+</html>
